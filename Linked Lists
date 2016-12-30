@@ -1,0 +1,81 @@
+// GreetingsConsoleApp.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+typedef struct Node
+{
+	
+	struct Node(int data)
+	{
+		this->data = data;
+		prev = NULL;
+		next = NULL;
+
+	}
+	int data;
+	struct Node * prev;
+	struct Node * next; 
+};
+
+class LinkedList
+{
+public:
+	Node * front;
+	Node * back;
+
+	LinkedList();
+	~LinkedList();
+
+	void appendNode(int);
+	void displayNodes();
+	//void displayNodesReverse();
+	void destroyList();
+};
+	LinkedList::LinkedList()
+	{
+		back = NULL;
+		front = NULL;
+	}
+
+	void LinkedList::appendNode(int data)
+	{
+		Node * n = new Node(data);
+		if (back == NULL)
+		{
+			
+			//n->prev = n;
+			//n->next = n;
+			back = n;
+			front = n;
+		}
+		else
+		{
+			back->next = n;
+			n->prev = back;
+			back = n;
+		}
+	}
+	void LinkedList::displayNodes()
+	{
+		Node * temp = front;
+		while (temp != NULL)
+		{
+			cout << temp->data;
+			temp = temp->next;
+		}
+	}
+
+
+int main()
+{
+	LinkedList * mylist = new LinkedList();
+	mylist->appendNode(10);
+	mylist->appendNode(20);
+	mylist->appendNode(30);
+	mylist->displayNodes();
+	
+	return 0;
+}
+
